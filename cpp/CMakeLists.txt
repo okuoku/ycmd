@@ -162,6 +162,11 @@ if( WIN32 OR CYGWIN )
   endif()
 endif()
 
+# Avoid "too many sections" error on Cygwin
+if( CYGWIN AND CMAKE_COMPILER_IS_GNUCXX )
+  add_definitions( -Wa,-mbig-obj )
+endif()
+
 #############################################################################
 
 # When used with Clang, adding the -std=c++0x flag to CMAKE_CXX_FLAGS will cause
